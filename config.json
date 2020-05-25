@@ -1,0 +1,14 @@
+{
+	"base_folder": "/home/marius/test_pxls_browser/",
+	"port": 8080,
+	"canvas": {
+		"pxls12": {
+			"w": 100,
+			"h": 100
+		},
+		"rplace": {
+			"w": 1000,
+			"h": 1000
+		}
+	}
+}

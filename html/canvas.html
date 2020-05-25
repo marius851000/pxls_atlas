@@ -1,0 +1,185 @@
+
+<!--
+	========================================================================
+	The /r/place Atlas
+
+	An Atlas of Reddit's /r/place, with information to each
+	artwork	of the canvas provided by the community.
+
+	Copyright (C) 2017 Roland Rytz <roland@draemm.li>
+	Licensed under the GNU Affero General Public License Version 3
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU Affero General Public License as
+	published by the Free Software Foundation, either version 3 of the
+	License, or (at your option) any later version.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	For more information, see:
+	https://draemm.li/various/place-atlas/license.txt
+
+	========================================================================
+-->
+
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			The {CANVAS_NAME} Atlas
+		</title>
+
+		<meta name="description" content="An interactive map of the canvas {CANVAS_NAME} on pxls.space, with information to each artwork of the canvas.">
+		<meta name="keywords" content="pxls">
+
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+		<meta name="mobile-web-app-capable" content="yes">
+
+		<link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
+
+
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>
+				<a href="/">
+					<img id="logo" src="/img/logo.png" height="50" width="50" alt="Logo">
+					<!-- If you wonder why I shrink the image in html,
+					     it's because this is the image that will be used
+					     by reddit and the like as the thumbnail for the site.
+					     The original is only 5.9kB, which wouldn't get much
+					     smaller by reducing the actualy size.  -->
+					<h1 id="title">The {CANVAS_NAME} Atlas</h1>
+				</a>
+			</header>
+
+			<div id="container">
+				<div id="loading">
+					<div id="loadingContent">
+						<div></div><br>
+						<span>&nbsp;&nbsp;Hang on...</span>
+						<noscript>
+							<p>Sorry, you need JavaScript to view the Atlas.</p>
+							<p>All JavaScript on this site is licensed under either the MIT or AGPL license.</p>
+							<p><a href="https://github.com/RolandR/place-atlas/">See the source on GitHub</a></p>
+						</noscript>
+					</div>
+				</div>
+				<canvas id="linesCanvas"></canvas>
+				<div id="innerContainer">
+					<canvas id="highlightCanvas" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}"></canvas>
+					<img id="image" src="/img/canvas/{CANVAS_NAME}.png" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}" />
+				</div>
+			</div>
+
+			<div id="entriesListContainer">
+				<nav>
+					<a id="aboutLink" href="/about.html">About</a>
+					<a id="drawLink" href="./{CANVAS_NAME}?mode=draw">Contribute</a>
+					<a id="returnMainPage" href="/">canvas list</a>
+				</nav>
+				<div id="entriesListControls">
+					<input autofocus id="searchList" type="text" placeholder="Search...">
+					<span id="atlasSize"></span>
+					<div id="sortContainer"><label>Sort:</label>
+						<select id="sort">
+							<option value="shuffle">Random</option>
+							<option value="relevant" id="relevantOption" disabled>Relevant</option>
+							<option value="alphaAsc">↓ Alphabetical</option>
+							<option value="alphaDesc">↑ Alphabetical</option>
+							<option value="newest">Newest</option>
+							<option value="oldest">Oldest</option>
+						</select>
+					</div>
+				</div>
+				<div id="entriesList">
+
+				</div>
+			</div>
+			<div id="entriesListBackground"></div>
+
+			<button id="hideListButton"></button>
+
+			<div id="zoomControls"><button title="Zoom In" id="zoomInButton"></button><button title="Reset View" id="zoomResetButton"></button><button title="Zoom Out" id="zoomOutButton"></button></div>
+
+			<div id="drawControlsContainer">
+				<a id="drawBackButton" href="./{CANVAS_NAME}">&lt; Back to the Atlas</a>
+				<div id="drawControls">
+					<div>
+						<button id="undoButton" disabled>Undo</button>
+						<button disabled id="redoButton">Redo</button>
+					</div>
+					<button disabled id="finishButton">Finish (Enter)</button>
+					<button id="resetButton">Reset</button>
+					<label id="highlightUnchartedLabel" title="Highlight uncharted areas of the map" class="checkboxLabel">
+						<input type="checkbox" id="highlightUncharted" checked> Highlight Empty
+					</label>
+					<!--TODO: what ? -->
+					<div id="objectInfo">
+						<label for="nameField">Name</label>
+						<input id="nameField" type="text" value="" placeholder="A short title">
+						<label for="descriptionField">Description</label>
+						<textarea id="descriptionField" placeholder="A short description to be understood by everyone"></textarea>
+						<label for="websiteField">Website</label>
+						<input id="websiteField" type="text" value="" placeholder="https://example.com">
+						<label for="subredditField">Subreddit</label>
+						<input id="subredditField" type="text" value="" placeholder="/r/example">
+						<div id="infoButtons">
+							<button id="cancelButton">Cancel</button>
+							<button id="exportButton">OK</button>
+						</div>
+					</div>
+				</div>
+				<!-- TODO:remove -->
+				<div id="hint">
+					<p>You can suggest new entries to the Atlas for art that isn't mapped yet.</p>
+					<p>Please read <a href="https://reddit.com/r/placeAtlas/comments/63afic/how_to_contribute/" target="_blank">this reddit post</a> for instructions.</p>
+					<p>Click anywhere on the image to start drawing a shape.
+					When you're happy with the result, click the "Finish" button above or press the Enter key.</p>
+					<p>You can then add more information about your object.</p>
+				</div>
+			</div>
+
+			<button class="hidden" id="closeObjectsListButton"></button>
+			<div id="objectsList">
+			</div>
+
+			<div id="exportOverlay" class="overlay">
+				<div id="exportWindow">
+					<p>Please copy the text below and submit it as a<br>
+					new text post to <a target="_blank" href="https://www.reddit.com/r/placeAtlas/">/r/placeAtlas</a> on Reddit.</p>
+					<p>I will then check it and add it to the atlas.</p>
+					<textarea cols="50" rows="5" id="exportString"></textarea>
+					<button id="exportCloseButton">Done</button>
+				</div>
+			</div>
+
+			<div id="author">
+				<!-- put the good github link -->
+				Original code by <a href="/" target="_blank" rel="author">Roland Rytz</a> for r/place. modified by other. Source on <a target="_blank" href="https://github.com/RolandR/place-atlas">GitHub</a>.
+			</div>
+
+		</div>
+
+
+
+
+		<script type="text/javascript" src="/js/pointInPolygon.js"></script>
+		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/atlas.js"></script>
+		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/view.js"></script>
+		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/overlap.js"></script>
+		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/draw.js"></script>
+		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/main.js"></script>
+
+
+<!-- TODO:uncomment -->
+<!--
+		<script type="text/javascript" src="/_js/stats.js?version=1.0.0"></script>
+-->
+
+<!--		<script type="text/javascript" src="/_js/minified.js?version=1.0.102"></script> -->
+
+
+	</body>
+</html>
