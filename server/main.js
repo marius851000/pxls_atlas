@@ -32,6 +32,7 @@ function Server(config) {
 
 Server.prototype.run = function() {
 	var config = this.config;
+	console.log("launching server on port "+config.port+".");
 	http.createServer(function (req, res) {
 		const parsed_url = url.parse(req.url, true);
 		var parsed_path = parsed_url.pathname.split("/");
@@ -165,11 +166,13 @@ Server.prototype.run = function() {
 			answer.send();
 		}
 		if (page_found === false) {
-			console.log(parsed_path);
+			console.log("page not found: "+parsed_path+".");
 			answer.content = "<p>page not found</p>";
 			answer.code = 404;
 			answer.send();
-		}
+		} else {
+			console.log("someone accesed the page "+parsed_path+".");
+		};
 	}).listen(this.port);
 };
 
