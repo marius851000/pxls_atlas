@@ -6,8 +6,9 @@ It allow you to reference different part of a finished canvas.
 The main difference with the original is that you can now have multiple canvas.
 
 It also have a node.js backend, and come with a new button that allow to disable the drawing of line for unhighlited element.
+
 ## goal
-To list the art, referencing the source art when it is a derived work.
+To list the art in here. Specifically, reference the original art when it is a derived work.
 
 ## adding a new canvas
 - add it to the config.json file, idincating it's width and height, in pixel.
