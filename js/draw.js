@@ -24,6 +24,8 @@
 	========================================================================
 */
 
+var canvas_width = document.getElementById("canvas_width").content;
+var canvas_height = document.getElementById("canvas_height").content;
 
 function initDraw(){
 
@@ -47,8 +49,8 @@ function initDraw(){
 	var shiftPressed = false;
 
 	var backgroundCanvas = document.createElement("canvas");
-	backgroundCanvas.width = {CANVAS_WIDTH};
-	backgroundCanvas.height = {CANVAS_HEIGHT};
+	backgroundCanvas.width = canvas_width;
+	backgroundCanvas.height = canvas_height;
 	var backgroundContext = backgroundCanvas.getContext("2d");
 
 	var highlightUncharted = true;

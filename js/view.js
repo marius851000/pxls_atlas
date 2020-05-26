@@ -22,6 +22,10 @@
 
 	========================================================================
 */
+
+var canvas_width = document.getElementById("canvas_width").content;
+var canvas_height = document.getElementById("canvas_height").content;
+
 var linesCanvas = document.getElementById("linesCanvas");
 var linesContext = linesCanvas.getContext("2d");
 var hovered = [];
@@ -30,8 +34,8 @@ var previousZoomOrigin = [0, 0];
 var previousScaleZoomOrigin = [0, 0];
 
 var backgroundCanvas = document.createElement("canvas");
-backgroundCanvas.width = {CANVAS_WIDTH};
-backgroundCanvas.height = {CANVAS_HEIGHT};
+backgroundCanvas.width = canvas_width;
+backgroundCanvas.height = canvas_height;
 var backgroundContext = backgroundCanvas.getContext("2d");
 
 var draw_all_line = true;
@@ -176,12 +180,12 @@ function initView(){
 		highlightEntryFromUrl();
 	}*/
 
-	if(document.documentElement.clientWidth > {CANVAS_WIDTH}){
+	if(document.documentElement.clientWidth > canvas_width){
 		entriesListShown = true;
 		wrapper.className = wrapper.className.replace(/ listHidden/g, "");
 	}
 
-	if(document.documentElement.clientWidth < {CANVAS_WIDTH}){
+	if(document.documentElement.clientWidth < canvas_width){
 		entriesListShown = false;
 		wrapper.className += " listHidden";
 	}
@@ -349,8 +353,8 @@ function initView(){
 			];
 
 			scaleZoomOrigin = [
-				 {CANVAS_WIDTH}/2 - entry.center[0]// + container.offsetLeft
-				,{CANVAS_HEIGHT}/2 - entry.center[1]// + container.offsetTop
+				 canvas_width/2 - entry.center[0]// + container.offsetLeft
+				,canvas_height/2 - entry.center[1]// + container.offsetTop
 			];
 
 			//console.log(zoomOrigin);
@@ -558,8 +562,8 @@ function initView(){
 					]
 
 					scaleZoomOrigin = [
-						 {CANVAS_WIDTH}/2  - this.entry.center[0]
-						,{CANVAS_HEIGHT}/2  - this.entry.center[1]
+						 canvas_width/2  - this.entry.center[0]
+						,canvas_height/2  - this.entry.center[1]
 					]
 
 					//console.log(zoomOrigin);
@@ -598,8 +602,8 @@ function initView(){
 					]
 
 					scaleZoomOrigin = [
-						 {CANVAS_WIDTH}/2  - this.entry.center[0]
-						,{CANVAS_HEIGHT}/2  - this.entry.center[1]
+						 canvas_width/2  - this.entry.center[0]
+						,canvas_height/2  - this.entry.center[1]
 					]
 
 					previousZoomOrigin = [zoomOrigin[0], zoomOrigin[1]];
@@ -780,12 +784,12 @@ function initView(){
 
 		var viewportWidth = document.documentElement.clientWidth;
 
-		if(document.documentElement.clientWidth > {CANVAS_WIDTH} && viewportWidth <= {CANVAS_WIDTH}){
+		if(document.documentElement.clientWidth > canvas_width && viewportWidth <= canvas_width){
 			entriesListShown = true;
 			wrapper.className = wrapper.className.replace(/ listHidden/g, "");
 		}
 
-		if(document.documentElement.clientWidth < {CANVAS_WIDTH} && viewportWidth >= {CANVAS_WIDTH}){
+		if(document.documentElement.clientWidth < canvas_width && viewportWidth >= canvas_width){
 			entriesListShown = false;
 			wrapper.className += " listHidden";
 		}

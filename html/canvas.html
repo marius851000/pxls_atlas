@@ -35,7 +35,8 @@
 
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 		<meta name="mobile-web-app-capable" content="yes">
-
+		<meta id="canvas_width" content="{CANVAS_WIDTH}">
+		<meta id="canvas_height" content="{CANVAS_HEIGHT}">
 		<link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
 
 
@@ -69,7 +70,7 @@
 				<canvas id="linesCanvas"></canvas>
 				<div id="innerContainer">
 					<canvas id="highlightCanvas" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}"></canvas>
-					<img id="image" src="/img/canvas/{CANVAS_NAME}.png" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}" />
+					<img id="image" src="/data/{CANVAS_NAME}/image.png" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}" />
 				</div>
 			</div>
 
@@ -166,10 +167,10 @@
 
 		<script type="text/javascript" src="/js/pointInPolygon.js"></script>
 		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/atlas.js"></script>
-		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/view.js"></script>
-		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/overlap.js"></script>
-		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/draw.js"></script>
-		<script type="text/javascript" src="/js/c/{CANVAS_NAME}/main.js"></script>
+		<script type="text/javascript" src="/js/view.js"></script>
+		<script type="text/javascript" src="/js/overlap.js"></script>
+		<script type="text/javascript" src="/js/draw.js"></script>
+		<script type="text/javascript" src="/js/main.js"></script>
 
 
 <!-- TODO:uncomment -->

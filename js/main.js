@@ -23,6 +23,8 @@
 	========================================================================
 */
 
+var canvas_width = document.getElementById("canvas_width").content;
+var canvas_height = document.getElementById("canvas_height").content;
 
 var innerContainer = document.getElementById("innerContainer");
 var container = document.getElementById("container");
@@ -51,13 +53,13 @@ function applyView(){
 	//console.log(zoomOrigin, scaleZoomOrigin);
 	//console.log(scaleZoomOrigin[0]);
 
-	scaleZoomOrigin[0] = Math.max(-({CANVAS_WIDTH}/2), Math.min(({CANVAS_WIDTH}/2), scaleZoomOrigin[0]));
-	scaleZoomOrigin[1] = Math.max(-({CANVAS_HEIGHT}/2), Math.min(({CANVAS_HEIGHT}/2), scaleZoomOrigin[1]));
+	scaleZoomOrigin[0] = Math.max(-(canvas_width/2), Math.min((canvas_width/2), scaleZoomOrigin[0]));
+	scaleZoomOrigin[1] = Math.max(-(canvas_height/2), Math.min((canvas_height/2), scaleZoomOrigin[1]));
 
 	zoomOrigin = [scaleZoomOrigin[0]*zoom, scaleZoomOrigin[1]*zoom];
 
-	innerContainer.style.height = (~~(zoom*{CANVAS_HEIGHT}))+"px";
-	innerContainer.style.width = (~~(zoom*{CANVAS_WIDTH}))+"px";
+	innerContainer.style.height = (~~(zoom*canvas_height))+"px";
+	innerContainer.style.width = (~~(zoom*canvas_width))+"px";
 
 	innerContainer.style.left = ~~(container.clientWidth/2 - innerContainer.clientWidth/2 + zoomOrigin[0] + container.offsetLeft)+"px";
 	innerContainer.style.top = ~~(container.clientHeight/2 - innerContainer.clientHeight/2 + zoomOrigin[1] + container.offsetTop)+"px";
