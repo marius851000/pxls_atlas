@@ -62,7 +62,7 @@
 						<noscript>
 							<p>Sorry, you need JavaScript to view the Atlas.</p>
 							<p>All JavaScript on this site is licensed under either the MIT or AGPL license.</p>
-							<p><a href="https://github.com/RolandR/place-atlas/">See the source on GitHub</a></p>
+							<p><a href="https://github.com/marius851000/pxls_atlas">See the source on GitHub</a></p>
 						</noscript>
 					</div>
 				</div>
@@ -80,6 +80,7 @@
 					<a id="returnMainPage" href="/">canvas list</a>
 				</nav>
 				<div id="entriesListControls">
+					<button type="button" id="hide_line" style="margin-bottom:1%" >toggle line drawing</button>
 					<input autofocus id="searchList" type="text" placeholder="Search...">
 					<span id="atlasSize"></span>
 					<div id="sortContainer"><label>Sort:</label>
@@ -88,8 +89,8 @@
 							<option value="relevant" id="relevantOption" disabled>Relevant</option>
 							<option value="alphaAsc">↓ Alphabetical</option>
 							<option value="alphaDesc">↑ Alphabetical</option>
-							<option value="newest">Newest</option>
-							<option value="oldest">Oldest</option>
+							<option value="newest">Newest added to the list</option>
+							<option value="oldest">Oldest added to the list</option>
 						</select>
 					</div>
 				</div>
@@ -121,8 +122,8 @@
 						<input id="nameField" type="text" value="" placeholder="A short title">
 						<label for="descriptionField">Description</label>
 						<textarea id="descriptionField" placeholder="A short description to be understood by everyone"></textarea>
-						<label for="websiteField">Website</label>
-						<input id="websiteField" type="text" value="" placeholder="https://example.com">
+						<label for="websiteField">Website (name, line jump, url, loop)</label>
+						<textarea id="websiteField" type="text" value=""></textarea>
 						<label for="subredditField">Subreddit</label>
 						<input id="subredditField" type="text" value="" placeholder="/r/example">
 						<div id="infoButtons">
@@ -134,7 +135,6 @@
 				<!-- TODO:remove -->
 				<div id="hint">
 					<p>You can suggest new entries to the Atlas for art that isn't mapped yet.</p>
-					<p>Please read <a href="https://reddit.com/r/placeAtlas/comments/63afic/how_to_contribute/" target="_blank">this reddit post</a> for instructions.</p>
 					<p>Click anywhere on the image to start drawing a shape.
 					When you're happy with the result, click the "Finish" button above or press the Enter key.</p>
 					<p>You can then add more information about your object.</p>
@@ -147,9 +147,8 @@
 
 			<div id="exportOverlay" class="overlay">
 				<div id="exportWindow">
-					<p>Please copy the text below and submit it as a<br>
-					new text post to <a target="_blank" href="https://www.reddit.com/r/placeAtlas/">/r/placeAtlas</a> on Reddit.</p>
-					<p>I will then check it and add it to the atlas.</p>
+					<!-- TODO: link -->
+					<p>This is the code for the entry. Send it to the one who manage this software (TODO: link)</p>
 					<textarea cols="50" rows="5" id="exportString"></textarea>
 					<button id="exportCloseButton">Done</button>
 				</div>
@@ -157,7 +156,7 @@
 
 			<div id="author">
 				<!-- put the good github link -->
-				Original code by <a href="/" target="_blank" rel="author">Roland Rytz</a> for r/place. modified by other. Source on <a target="_blank" href="https://github.com/RolandR/place-atlas">GitHub</a>.
+				Original code by <a href="/" target="_blank" rel="author">Roland Rytz</a> for r/place. modified by other. Source on <a target="_blank" href="https://github.com/marius851000/pxls_atlas">GitHub</a>.
 			</div>
 
 		</div>

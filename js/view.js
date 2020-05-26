@@ -34,6 +34,17 @@ backgroundCanvas.width = {CANVAS_WIDTH};
 backgroundCanvas.height = {CANVAS_HEIGHT};
 var backgroundContext = backgroundCanvas.getContext("2d");
 
+var draw_all_line = true;
+
+document.getElementById("hide_line").addEventListener("click", function(e) {
+	if (draw_all_line) {
+		draw_all_line = false;
+	} else {
+		draw_all_line = true;
+	};
+	renderBackground(atlas);
+});
+
 function updateLines(){
 
 	linesCanvas.width = linesCanvas.clientWidth;
@@ -88,35 +99,38 @@ function renderBackground(atlas){
 
 	backgroundContext.clearRect(0, 0, canvas.width, canvas.height);
 
-	//backgroundCanvas.width = 1000 * zoom;
-	//backgroundCanvas.height = 1000 * zoom;
+		//backgroundCanvas.width = 1000 * zoom;
+		//backgroundCanvas.height = 1000 * zoom;
 
-	//backgroundContext.lineWidth = zoom;
+		//backgroundContext.lineWidth = zoom;
 
-	backgroundContext.fillStyle = "rgba(0, 0, 0, 0.6)";
-	backgroundContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+		backgroundContext.fillStyle = "rgba(0, 0, 0, 0.6)";
+		backgroundContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
 
-	for(var i = 0; i < atlas.length; i++){
+		for(var i = 0; i < atlas.length; i++){
 
-		var path = atlas[i].path;
+			var path = atlas[i].path;
 
-		backgroundContext.beginPath();
+			backgroundContext.beginPath();
 
-		if(path[0]){
-			//backgroundContext.moveTo(path[0][0]*zoom, path[0][1]*zoom);
-			backgroundContext.moveTo(path[0][0], path[0][1]);
+			if(path[0]){
+				//backgroundContext.moveTo(path[0][0]*zoom, path[0][1]*zoom);
+				backgroundContext.moveTo(path[0][0], path[0][1]);
+			}
+
+			for(var p = 1; p < path.length; p++){
+				//backgroundContext.lineTo(path[p][0]*zoom, path[p][1]*zoom);
+				backgroundContext.lineTo(path[p][0], path[p][1]);
+			}
+
+			backgroundContext.closePath();
+
+			if (draw_all_line) {
+				backgroundContext.strokeStyle = "rgba(255, 255, 255, 0.8)";
+				backgroundContext.stroke();
+			}
 		}
 
-		for(var p = 1; p < path.length; p++){
-			//backgroundContext.lineTo(path[p][0]*zoom, path[p][1]*zoom);
-			backgroundContext.lineTo(path[p][0], path[p][1]);
-		}
-
-		backgroundContext.closePath();
-
-		backgroundContext.strokeStyle = "rgba(255, 255, 255, 0.8)";
-		backgroundContext.stroke();
-	}
 }
 
 function initView(){
@@ -281,6 +295,12 @@ function initView(){
 				}
 				html += "<a target=\"_blank\" href=https://reddit.com"+subreddit+">"+subreddit+"</a>";
 			}
+		}
+		if (entry.site) {
+			for (site_name in entry.site) {
+				var href = entry.site[site_name];
+				html += "<a target=\"_blank\" href=\""+href+"\">"+site_name+"</a>";
+			};
 		}
 		element.innerHTML += html;
 

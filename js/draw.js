@@ -181,12 +181,6 @@ function initDraw(){
 		}
 	});
 
-	document.getElementById("websiteField").addEventListener("keyup", function(e){
-		if(e.key == "Enter"){
-			exportJson();
-		}
-	});
-
 	document.getElementById("subredditField").addEventListener("keyup", function(e){
 		if(e.key == "Enter"){
 			exportJson();
@@ -208,11 +202,19 @@ function initDraw(){
 	});
 
 	function exportJson(){
+		var site_dic = {};
+		var site_list = document.getElementById("websiteField").value.split("\n");
+		if (site_list.length % 2 == 1) {
+			site_list.push("ERROR");
+		};
+		for (var x = 0; x < site_list.length; x+= 2) {
+			site_dic[site_list[x]] = site_list[x+1];
+		};
 		var exportObject = {
 			 id: 0
 			,name: document.getElementById("nameField").value
 			,description: document.getElementById("descriptionField").value
-			,website: document.getElementById("websiteField").value
+			,site: site_dic
 			,subreddit: document.getElementById("subredditField").value
 			,center: calculateCenter(path)
 			,path: path
